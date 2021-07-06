@@ -20,6 +20,7 @@ class WordDistance {
             int index1 = index1List.get(i);
             int index2 = index2List.get(j);
             
+            //this logic squeezes the minimum range since in map we are keeping the indexes in sorted order.
             if(index1<index2){
                 result=Math.min(result, index2-index1);
                 i++;
