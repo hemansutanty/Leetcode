@@ -16,8 +16,7 @@ class Solution {
                 dp.put(amount, minCoins);
             }
         }
-        int minCount = minCoins==Integer.MAX_VALUE?-1:minCoins;
-        dp.put(amount,minCount);
+        dp.put(amount,minCoins==Integer.MAX_VALUE?-1:minCoins);
         return dp.get(amount);
     }
 }
