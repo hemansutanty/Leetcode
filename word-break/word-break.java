@@ -1,20 +1,21 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> set = new HashSet<>(wordDict);
-        Map<String, Boolean> cache = new HashMap<>();
-        return wordBreak(s, set, cache);    
+        Boolean[] cache = new Boolean[s.length()];
+        return wordBreak(s, set, cache,0);    
     }
     
-    public boolean wordBreak(String s, Set<String> set, Map<String, Boolean> cache){
-        if(s.length()==0)return true;
-        if(cache.containsKey(s))return cache.get(s);
-        for(int i=1;i<=s.length();i++){
-            if(set.contains(s.substring(0,i)) && wordBreak(s.substring(i), set, cache)){
-                cache.put(s, true);
-                return true;
+    public boolean wordBreak(String s, Set<String> set, Boolean[] cache, int startIndex){
+        if(s.length()==startIndex)return true;
+        if(cache[startIndex]!=null)return cache[startIndex];
+        boolean result = false;
+        for(int i=startIndex+1;i<=s.length();i++){
+            if(!set.contains(s.substring(startIndex,i)))continue;
+            if(wordBreak(s, set, cache,i)){
+                result = true;break;
             }
         }
-        cache.put(s,false);
-        return false;
+        cache[startIndex]=result;
+        return result;
     }
 }
